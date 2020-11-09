@@ -31,7 +31,7 @@ public class SimpleAppGame {
         int x = random.nextInt(Board.WIDTH);
         int y = random.nextInt(Board.HEIGHT);
         Player addes = board.createPlayer(x,y);
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(addes);
+        return "{id : "+ addes.getId() +" } ";
     }
 
     private static String deletePlayers(Request req, Response resp){
