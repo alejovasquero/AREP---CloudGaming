@@ -47,7 +47,10 @@ public class MongoPlayerDAO {
 
         BasicDBObject updateObject = new BasicDBObject();
         updateObject.put("$set", newDocument);
-        coll.updateOne(query, updateObject);
+        coll.updateOne(
+                new BasicDBObject("_id", new ObjectId(p.getId())),
+                new BasicDBObject("$set", newDocument)
+        );
     }
 
     public void deletePlayers(){
