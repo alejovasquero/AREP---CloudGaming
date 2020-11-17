@@ -5,7 +5,7 @@
   <artifactId>SparkWebApp</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>SimpleAppGame</name>
+  <name>edu.eci.arep.SimpleAppGame</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>

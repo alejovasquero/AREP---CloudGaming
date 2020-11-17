@@ -1,4 +1,4 @@
-package persistence;
+package edu.eci.arep;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.*;
@@ -6,7 +6,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import elements.Player;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 

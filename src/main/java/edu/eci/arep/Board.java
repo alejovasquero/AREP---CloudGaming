@@ -1,11 +1,6 @@
-package elements;
+package edu.eci.arep;
 
-import exceptions.GameException;
-import persistence.MongoPlayerDAO;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Board {

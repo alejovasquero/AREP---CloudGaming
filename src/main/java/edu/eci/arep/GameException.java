@@ -1,4 +1,4 @@
-package exceptions;
+package edu.eci.arep;
 
 public class GameException extends Exception{
 

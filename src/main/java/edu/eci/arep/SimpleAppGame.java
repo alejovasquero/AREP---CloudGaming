@@ -1,12 +1,11 @@
+package edu.eci.arep;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import elements.Board;
-import elements.Player;
 import spark.Request;
 import spark.Response;
 
 
-import javax.swing.*;
 import java.util.Random;
 
 import static spark.Spark.*;
