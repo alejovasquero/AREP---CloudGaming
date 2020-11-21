@@ -9,6 +9,10 @@ public class Player {
     private int y;
 
 
+    public Player(){
+
+    }
+
     public Player(int x, int y){
         this.x = x;
         this.y = y;
@@ -37,5 +41,6 @@ public class Player {
     public void setId(String id){
         this.id = id;
     }
+
 
 }

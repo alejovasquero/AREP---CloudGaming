@@ -1,13 +1,14 @@
 package edu.eci.arep;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.*;
-import com.mongodb.client.MongoClients;
+import com.mongodb.client.*;
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import static com.mongodb.client.model.Projections.excludeId;
 
 public class MongoPlayerDAO {
 
@@ -55,5 +56,23 @@ public class MongoPlayerDAO {
     public void deletePlayers(){
         BasicDBObject document = new BasicDBObject();
         coll.deleteMany(document);
+    }
+
+    public Player getPlayer(String id)  {
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("_id", new ObjectId(id));
+        MongoCursor<Document> cursor = coll.find(whereQuery).projection(excludeId()).limit(1).iterator();
+        String json = "";
+        while(cursor.hasNext()) {
+            json = cursor.next().toJson();
+        }
+        Player ans = null;
+        try {
+            ans = JSON_MAPPER.readValue(json, Player.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        ans.setId(id);
+        return ans;
     }
 }

@@ -1,14 +1,16 @@
 package edu.eci.arep;
 
+import edu.eci.arep.threads.BoardThread;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Board {
 
-    public static int WIDTH =800;
-    public static int HEIGHT =800;
+    public static int WIDTH =100000;
+    public static int HEIGHT =100000;
     private AtomicInteger numberOfPlayers = new AtomicInteger(0);
-    private HashMap<String, Player> players = new HashMap<String, Player>();
 
     private MongoPlayerDAO mongoPlayerDAO = new MongoPlayerDAO();
 
@@ -16,7 +18,6 @@ public class Board {
     public Player createPlayer(int x, int y){
         Player added = new Player(x,y);
         mongoPlayerDAO.savePlayer(added);
-        players.put(added.getId(), added);
         return added;
     }
 
@@ -25,7 +26,26 @@ public class Board {
     }
 
     public Player movePlayer(String id, String direction){
-        Player a = players.get(id);
+        ArrayList<Thread> moves = new ArrayList<Thread>();
+        Player a = mongoPlayerDAO.getPlayer(id);
+        moves.add(new BoardThread(a, Directions.down));
+        moves.add(new BoardThread(a, Directions.up));
+        moves.add(new BoardThread(a, Directions.right));
+        moves.add(new BoardThread(a, Directions.left));
+        moves.add(new BoardThread(a, Directions.down));
+        moves.add(new BoardThread(a, Directions.up));
+        moves.add(new BoardThread(a, Directions.right));
+        moves.add(new BoardThread(a, Directions.left));
+        for (Thread m: moves){
+            m.start();
+        }
+        for (Thread m: moves){
+            try {
+                m.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         if(a!=null){
             if(direction.equals(Directions.down.toString())){
                 a.setY(a.getY() - 1);
